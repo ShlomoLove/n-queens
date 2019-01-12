@@ -30,6 +30,44 @@ window.findNRooksSolution = function(n) {
 };
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
+
+// window.countNRooksSolutions = function(n) {
+//   if (n === 1) {
+//     return 1
+//   }
+//   for (let i = n - 1; i >= 1; i--) {
+//     n *= i; 
+//   }
+//   return n; 
+// };
+
+// window.countNRooksSolutions = function(n) {
+//   var solutionCount = 0;
+//   let board = new Board ({n})
+  
+//   let recurseCount = (row = 0) => {
+//     if (row < n) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+//       for (let col = 0; col < n; col++) {
+//         board.togglePiece(row, col);
+//         if (board.hasAnyRooksConflicts()) {
+//          board.togglePiece(row, col)
+//         } else {
+//         if (row === n-1) {
+//           solutionCount += 1;
+//           board.togglePiece(row, col)
+//         } else {
+//           recurseCount (row + 1)
+//           board.togglePiece (row, col )
+//           }
+//         }
+//       }
+//     }  
+//   }
+//   recurseCount (); 
+//   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
+//   return solutionCount;
+// };
+
 window.countNRooksSolutions = function(n) {
   var solutionCount = 0;
   let board = new Board ({n})

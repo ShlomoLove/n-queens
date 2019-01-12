@@ -85,7 +85,7 @@
       for(var i = 0; i < row.length; i++) {
         if(row[i] === 1) {
           count += 1;
-          if(count === 2) {
+          if(count > 1) {
             return true;
           }
         }
@@ -113,7 +113,7 @@
       for(var i = 0; i < rows.length; i++) {
         if(rows[i][colIndex] === 1) {
           counter += 1;
-          if(counter === 2) {
+          if(counter > 1) {
             return true;
           }
         }

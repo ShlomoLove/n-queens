@@ -73,16 +73,20 @@ window.countNRooksSolutions = function(n) {
   let board = new Board ({n})
   
   let recurseCount = (row = 0) => {
-    if (row < n) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+    if (row < n) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
       for (let col = 0; col < n; col++) {
-       board.togglePiece(row, col);
-       if (!board.hasAnyRooksConflicts()) {
-         recurseCount (row + 1);
-       }
-       board.togglePiece(row, col)
+        board.togglePiece(row, col);
+        if (!board.hasAnyColConflicts()) {
+          if (row === n-1) {
+            solutionCount +=1;
+            board.togglePiece(row, col)
+            return;
+          } else {
+            recurseCount(row + 1)
+          }
+        }
+        board.togglePiece(row, col)
       }
-    } else {
-      solutionCount += 1; 
     }
   }
   recurseCount (); 

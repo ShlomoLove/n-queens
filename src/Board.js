@@ -23,7 +23,7 @@
         return this.get(rowIndex);
       }, this);
     },
-
+  
     togglePiece: function(rowIndex, colIndex) {
       this.get(rowIndex)[colIndex] = + !this.get(rowIndex)[colIndex];
       this.trigger('change');
@@ -61,7 +61,7 @@
       );
     },
 
-
+    
 /*
          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
@@ -104,7 +104,6 @@
       return false; 
     },
 
-
     // COLUMNS - run from top to bottom
     // --------------------------------------------------------------
     // test if a specific column on this board contains a conflict
@@ -132,7 +131,6 @@
       }
       return false;
     },
-
 
     // Major Diagonals - go from top-left to bottom-right
     // --------------------------------------------------------------

@@ -32,27 +32,69 @@ window.findNRooksSolution = function(n) {
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
   var solutionCount = 0;
+  let board = new Board ({n})
   
-  let recurseCount = function () {
-    
+  let recurseCount = (row = 0) => {
+    if (row < n) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+      for (let col = 0; col < n; col++) {
+       board.togglePiece(row, col);
+       if (!board.hasAnyRooksConflicts()) {
+         recurseCount (row + 1);
+       }
+       board.togglePiece(row, col)
+      }
+    } else {
+      solutionCount += 1; 
+    }
   }
-
+  recurseCount (); 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
 };
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 window.findNQueensSolution = function(n) {
-  var solution = undefined; //fixme
-
+  let board = new Board ({n})
+  let solution;
+  
+  let recurse = (row = 0) => {
+    if (row < n) {
+      for (let col = 0; col < n; col++) {
+        board.togglePiece(row, col);
+        if (!board.hasAnyQueensConflicts()) {
+          recurse (row + 1)
+        }
+        board.togglePiece(row, col)
+      }
+    } else {
+      solution = board.rows().map (row => row.slice());
+      return 
+    }
+  }
+  recurse(); 
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
-  return solution;
+  return solution ? solution : board.rows().map (x => x.slice()) ;
 };
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
 window.countNQueensSolutions = function(n) {
-  var solutionCount = undefined; //fixme
+  var solutionCount = 0;
+  let board = new Board ({n})
 
+  let recurseCount = (row = 0) => {
+    if (row < n) {
+      for (let col = 0; col < n; col++) {
+        board.togglePiece(row, col);
+        if (!board.hasAnyQueensConflicts()) {
+          recurseCount (row + 1)
+        }
+        board.togglePiece (row, col)
+      }
+    } else {
+      solutionCount += 1; 
+    }
+  }
+  recurseCount();
   console.log('Number of solutions for ' + n + ' queens:', solutionCount);
   return solutionCount;
 };

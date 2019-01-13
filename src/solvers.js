@@ -132,17 +132,30 @@ window.countNQueensSolutions = function(n) {
   var solutionCount = 0;
   let board = new Board ({n})
 
+  if (n === 0 || n === 1) {
+    return 1; 
+  }
+
+  if (n === 3 || n === 2) {
+    return 0;
+  }
+
   let recurseCount = (row = 0) => {
     if (row < n) {
       for (let col = 0; col < n; col++) {
         board.togglePiece(row, col);
         if (!board.hasAnyQueensConflicts()) {
-          recurseCount (row + 1)
+          if (row === n-1){
+            solutionCount += 1;
+            board.togglePiece(row, col);
+          } else {
+            recurseCount (row + 1)
+            board.togglePiece(row, col);
+          } 
+        } else {
+          board.togglePiece (row, col)
         }
-        board.togglePiece (row, col)
       }
-    } else {
-      solutionCount += 1; 
     }
   }
   recurseCount();

@@ -16,17 +16,26 @@
 
 
 window.findNRooksSolution = function(n) {
-  var solution = []; 
-  for (let i = 0; i < n; i++) {
-    let row = [];
-    for (let y = 0; y < n; y++) {
-      row.push (0); 
+  let board = new Board ({n})
+  var solution; 
+
+  let recurseCheck = (row = 0) => {
+    if (row < n ) {
+      for (let col = 0; col < n; col++) {
+        board.togglePiece(row, col);
+        if (!board.hasColConflictAt(col)) {
+          recurseCheck(row + 1)
+        } else {
+          board.togglePiece(row, col);
+        }
+      }
     }
-    row[i] = 1; 
-    solution.push(row)
+    solution = board.rows()
+    return 
   }
+  recurseCheck();
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
-  return solution;
+  return solution ? solution : board.rows()
 };
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
@@ -76,9 +85,9 @@ window.countNRooksSolutions = function(n) {
     if (row < n) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
       for (let col = 0; col < n; col++) {
         board.togglePiece(row, col);
-        if (!board.hasAnyColConflicts()) {
+        if (!board.hasColConflictAt(col)) {
           if (row === n-1) {
-            solutionCount +=1;
+            solutionCount += 1;
             board.togglePiece(row, col)
             return;
           } else {
